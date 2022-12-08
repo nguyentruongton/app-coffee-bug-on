@@ -1,10 +1,15 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View ,ScrollView} from "react-native";
 import styles from "./index.css";
+import Category from "./category";
+import ListProduct from "./listProduct";
 const Menu = () => {
     return(
         <View style={styles.container}>
-            <Text>Menu</Text>
+            <ScrollView>
+                <Category/>
+                <ListProduct/>
+            </ScrollView>
         </View>
     );
 }
