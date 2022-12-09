@@ -12,7 +12,6 @@ const ItemDetail = ({route}) => {
     const amount = 1
     const product = { id, name, price, amount }
     addProduct(product)
-    console.log(product)
     }
     return(
         <View>
