@@ -14,7 +14,8 @@ function ProductItem(props) {
     } = props.product //destructuring an object    
     const {onPress} = props
     debugger
-    return ( <TouchableOpacity 
+    return ( 
+    <TouchableOpacity 
         onPress={onPress}
         style={{
         height: 150,                 
