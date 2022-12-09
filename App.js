@@ -2,9 +2,9 @@ import React from 'react';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {NavigationContainer} from '@react-navigation/native'
-import MainPage from './component/mainPage/index'
-import Menu from './component/menu/index'
-import General from './component/general'
+import MainPage from './component/mainPage/mainPage'
+import Menu from './component/menu/indexMenu'
+import General from './component/general/general'
 
 
 export default function App() {
@@ -41,7 +41,7 @@ export default function App() {
         <Tab.Screen name='Trang chủ' component={MainPage} 
         options={{headerShown: true,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
         <Tab.Screen name='Đặt hàng' component={Menu} 
-        options={{headerShown: true,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
+        options={{headerShown: false,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
         <Tab.Screen name='Khác' component={General} 
         options={{headerShown: true,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
       </Tab.Navigator>

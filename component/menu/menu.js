@@ -1,7 +1,7 @@
 import React from "react";
-import { View,FlatList} from "react-native";
+import { View ,FlatList,TouchableOpacity,Image,Text} from "react-native";
 import ProductItem from "./productItem";
-const ListProduct = () => {
+const Menu = ({navigation}) => {
     const foods =[
         {
             name: 'Cafe phê Việt Nam',
@@ -38,14 +38,14 @@ const ListProduct = () => {
                 renderItem={({item}) => 
                 <ProductItem 
                     onPress={()=> {                        
-                        alert(`Sản phẩm tên là: ${item.name}`)
+                    navigation.navigate('Chi tiết sản phẩm',{name: item.name})
                     }}
                     product = {item} key={item.name}/>
-                }
+                    }
                 keyExtractor={eachProduct => eachProduct.name}
-            />}    
+            />}
         </View>
     );
 }
 
-export default ListProduct;
+export default Menu;
