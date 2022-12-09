@@ -2,15 +2,20 @@ import React from 'react';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {NavigationContainer} from '@react-navigation/native'
+
+import ListProductProvider from './context/listProductContext';
 import MainPage from './component/mainPage/mainPage'
 import Menu from './component/menu/indexMenu'
 import General from './component/general/general'
+import Cart from './component/cart/cart'
+
 
 
 export default function App() {
   const Tab = createBottomTabNavigator();
   return (
     <NavigationContainer>
+      <ListProductProvider>
       <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon:({focused,size,color}) =>{
@@ -23,6 +28,9 @@ export default function App() {
             size = focused ? size + 10:size + 3;
           }else if(route.name === 'Khác'){
             iconName = focused ? 'menu' : 'menu-outline';
+            size = focused ? size + 10:size + 3;
+          }else if(route.name === 'Giỏ hàng'){
+            iconName = focused ? 'cart' : 'cart-outline';
             size = focused ? size + 10:size + 3;
           }
           return <Ionic name={iconName} size={size} color={color}/>
@@ -44,7 +52,10 @@ export default function App() {
         options={{headerShown: false,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
         <Tab.Screen name='Khác' component={General} 
         options={{headerShown: true,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
+        <Tab.Screen name='Giỏ hàng' component={Cart} 
+        options={{headerShown: true,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
       </Tab.Navigator>
+      </ListProductProvider>
     </NavigationContainer>
   );
 }
