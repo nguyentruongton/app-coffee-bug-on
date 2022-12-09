@@ -17,10 +17,8 @@ const ListProductProvider = (props) => {
           }
         })
         setProducts([...products]);
-        console.log([...products]);
       } else {
         setProducts([...products, product])
-        console.log([...products, product]);
       }
     }
 
