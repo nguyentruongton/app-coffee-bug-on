@@ -1,6 +1,6 @@
 import react,{useContext, useEffect} from 'react';
 import { ListProductContext } from '../../context/listProductContext';
-import { Button, ScrollView, Text, View } from "react-native";
+import { Button, ScrollView, Text, View , TextInput } from "react-native";
 
 const Cart = () => {
     const { products, delProduct, upAmount, downAmount, clearCart } = useContext(ListProductContext);
@@ -28,7 +28,17 @@ const Cart = () => {
                         ))
                     }
                     <Text>Tổng đơn hàng: {sum}</Text>
-                </View>
+                </View>    
+                <View>
+                    <Text>Nhập mã giảm giá</Text>
+                    <TextInput
+                        style={{height: 40,margin: 12,borderWidth: 1,padding: 10}}
+                    />
+                    <Button title='Gửi'/>
+                </View>    
+                <View>
+                    <Button title='Thanh Toán'/>
+                </View>   
         </ScrollView>
             :
             <Text>Giỏ hàng rỗng</Text>
