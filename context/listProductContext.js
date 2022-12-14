@@ -8,36 +8,36 @@ const ListProductProvider = (props) => {
     
     const addProduct = async (product) => {
       const existedProduct = products.find((item) => {
-        return item.id === product.id
+        return item.name === product.name
       })
       if (existedProduct) {
         products.forEach((item) => {
-          if (item.id === product.id) {
+          if (item.name === product.name) {
             item.amount += 1
           }
         })
         setProducts([...products]);
       } else {
-        setProducts([...products, product])
+        setProducts([...products, product].sort((a, b) => a.name > b.name ? 1 : -1))
       }
     }
 
-    const delProduct = (id) => {
-        setProducts(products.filter((n) => (n.id !== id)));
+    const delProduct = (name) => {
+        setProducts(products.filter((n) => (n.name !== name)));
       }
     
-      const upAmount = (id) => {
+      const upAmount = (name) => {
         products.forEach((item) => {
-          if (item.id === id) {
+          if (item.name === name) {
             item.amount += 1
           }
         })
         setProducts([...products])
       }
     
-      const downAmount = (id) => {
+      const downAmount = (name) => {
         products.forEach((item) => {
-          if (item.id === id) {
+          if (item.name === name) {
             item.amount -= 1
             if (item.amount <= 1) {
               item.amount = 1

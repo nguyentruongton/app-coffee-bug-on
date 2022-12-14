@@ -5,12 +5,15 @@ import { Dimensions } from 'react-native';
 const MainPage = () => {
     const images = [
         {
+          id: 1,
           source: 'https://i.imgur.com/TZExxgM.png',
         },
         {
+          id: 2,
           source: 'https://i.imgur.com/Mr8A0h6.png',
         },
         {
+          id: 3,
           source: 'https://i.imgur.com/EoMTm4S.png',
         },
       ]
@@ -22,7 +25,7 @@ const MainPage = () => {
             scrollIndicatorInsets={{top: 10, left: 10, bottom: 10,right: 10}} //ios
             >
                 {images.map((item) => (
-                    <Image
+                    <Image key={item.id}
                     style={{width: Dimensions.get('window').width,height:100}} 
                     source={{uri:`${item.source}`}}/>  
                 ))}

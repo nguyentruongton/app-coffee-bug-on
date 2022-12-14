@@ -1,6 +1,6 @@
 import react,{useContext, useEffect} from 'react';
 import { ListProductContext } from '../../context/listProductContext';
-import { Button, ScrollView, Text, View } from "react-native";
+import { Button, ScrollView, Text, View , TextInput, TouchableOpacity} from "react-native";
 
 const Cart = () => {
     const { products, delProduct, upAmount, downAmount, clearCart } = useContext(ListProductContext);
@@ -8,27 +8,55 @@ const Cart = () => {
     products.forEach(item =>{
         sum += item.amount * item.price;
     });
-
     return (
         <View>
             {products.length > 0?
             <ScrollView>
                 <View>
-                    <Button title='Xóa toàn bồ' onPress={() => clearCart()}/>
+                    <TouchableOpacity onPress={() => clearCart()}>
+                        <Text>Xóa toàn bộ</Text>
+                    </TouchableOpacity>
                     {
                         products.map((n) => (
-                            <View>
+                            <View key={n.name}>
                                 <Text>{n.name}</Text>
                                 <Text>{n.price}</Text>
-                                <Button title='+' onPress={()=>upAmount(n.id)}/>
+                                <TouchableOpacity
+                                    onPress={()=>upAmount(n.name)}
+                                    >
+                                    <Text>+</Text>
+                                </TouchableOpacity>
                                 <Text>{n.amount}</Text>
-                                <Button title='-' onPress={()=>downAmount(n.id)}/>
-                                <Button title='Xóa' onPress={()=>delProduct(n.id)}/>
+                                <TouchableOpacity
+                                    onPress={()=>downAmount(n.name)}
+                                    >
+                                    <Text>-</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={()=>delProduct(n.name)}
+                                    >
+                                    <Text>Xóa</Text>
+                                </TouchableOpacity>
                             </View>
                         ))
                     }
                     <Text>Tổng đơn hàng: {sum}</Text>
-                </View>
+                </View>    
+                <View>
+                    <Text>Nhập mã giảm giá</Text>
+                    <TextInput
+                        style={{height: 40,margin: 12,borderWidth: 1,padding: 10}}
+                    />
+                    <TouchableOpacity>
+                        <Text>Gửi</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text>Xóa mã</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text>Gửi</Text>
+                    </TouchableOpacity>
+                </View> 
         </ScrollView>
             :
             <Text>Giỏ hàng rỗng</Text>
