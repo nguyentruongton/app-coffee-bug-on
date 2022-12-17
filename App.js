@@ -6,7 +6,7 @@ import {NavigationContainer} from '@react-navigation/native'
 import ListProductProvider from './context/listProductContext';
 import MainPage from './component/mainPage/mainPage'
 import Menu from './component/menu/indexMenu'
-import General from './component/general/general'
+import General from './component/general/indexMenu'
 import Cart from './component/cart/cart'
 
 
@@ -51,7 +51,7 @@ export default function App() {
         <Tab.Screen name='Đặt hàng' component={Menu} 
         options={{headerShown: false,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
         <Tab.Screen name='Khác' component={General} 
-        options={{headerShown: true,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
+        options={{headerShown: false,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
         <Tab.Screen name='Giỏ hàng' component={Cart} 
         options={{headerShown: true,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
       </Tab.Navigator>
