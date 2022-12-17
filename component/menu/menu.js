@@ -52,7 +52,8 @@ const Menu = ({navigation}) => {
                     product = {item} key={item.name}/>
                     }
                 keyExtractor={eachProduct => eachProduct.name}
-            />}
+                />
+            }
         </View>
     );
 }

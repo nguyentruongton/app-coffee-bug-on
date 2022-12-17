@@ -6,7 +6,7 @@ import {
     TouchableOpacity
 } from 'react-native'
 
-function ProductItem(props) {
+const ProductItem = (props) => {
     let { 
         name, 
         price, 
