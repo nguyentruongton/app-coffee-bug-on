@@ -5,12 +5,14 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native'
+import { btoa } from 'react-native-quick-base64';
 
 const ProductItem = (props) => {
-    let { 
+    let {
+        _id,
         name, 
         price, 
-        url, 
+        image, 
     } = props.product //destructuring an object    
     const {onPress} = props
     debugger
@@ -32,7 +34,9 @@ const ProductItem = (props) => {
                 marginRight: 15
             }}
             source={{
-                uri: url
+                uri: `data:image/png;base64,${btoa(new Uint8Array(image.data.data).reduce(function (data, byte) {
+                    return data + String.fromCharCode(byte);
+                }, ''))}`
         }} />
         <View style={{                    
             flex: 1,
