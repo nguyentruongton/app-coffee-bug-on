@@ -7,7 +7,7 @@ import {
   Dimensions,
   StatusBar,
 } from "react-native";
-import Panel from "./Panel";
+import Panel from "./panel";
 import { Appbar } from "react-native-paper";
 import NewProducts from "./NewProducts";
 
