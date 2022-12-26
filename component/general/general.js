@@ -19,7 +19,7 @@ const General = ({navigation}) => {
             >
                 <Text>Thông tin tài khoản</Text>
             </TouchableOpacity>
-            {/* <TouchableOpacity
+            <TouchableOpacity
             onPress={() => {
                 navigation.navigate('Đơn hàng đã đặt',{
                     id: profileuser.id,
@@ -28,7 +28,7 @@ const General = ({navigation}) => {
             }}
             >
                 <Text>Đơn hàng đã đặt</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
             <TouchableOpacity
             onPress={() => {
                 navigation.navigate('Đăng nhập')
