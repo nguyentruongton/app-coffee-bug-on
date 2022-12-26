@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import styles from "../../BugOnStyles";
-import { Text, TouchableOpacity, View, Image } from "react-native";
+import { Text, View, Image } from "react-native";
 import { ListProductContext } from "../../context/listProductContext";
 import { btoa } from "react-native-quick-base64";
 import { RadioButton, Button } from "react-native-paper";
