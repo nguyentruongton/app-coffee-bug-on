@@ -1,15 +1,51 @@
 import React from "react";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import styles from "../../BugOnStyles";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Appbar, Chip } from "react-native-paper";
 import Menu from "./menu";
 import ItemDetail from "../itemDetail/itemDetail";
+
+const CustomNavigationBar = ({ navigation, back }) => {
+  return (
+    <Appbar.Header>
+      {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
+      <Appbar.Content titleStyle={styles.titleAppBar} title="Thực đơn" />
+    </Appbar.Header>
+  );
+};
+
 const IndexMenu = () => {
-     const Stack = createNativeStackNavigator();
-    return(
-        <Stack.Navigator>
-            <Stack.Screen name='Menu nước uống' component={Menu} options={{headerShown: true,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
-            <Stack.Screen name='Chi tiết sản phẩm' component={ItemDetail} options={{headerShown: true,headerTintColor:'#3D685E',headerStyle:{backgroundColor:'#EFF1F0',}}}/>
-        </Stack.Navigator>
-    );
-}
+  const Stack = createNativeStackNavigator();
+  return (
+    // <Stack.Navigator>
+    //   <Stack.Screen
+    //     name="Thực đơn"
+    //     component={Menu}
+    //     options={{
+    //       headerShown: true,
+    //       headerTintColor: "#3D685E",
+    //       headerStyle: { backgroundColor: "#EFF1F0" },
+    //     }}
+    //   />
+
+    //   <Stack.Screen
+    //     name="Chi tiết"
+    //     component={ItemDetail}
+    //     options={{
+    //       headerShown: true,
+    //       headerTintColor: "#3D685E",
+    //       headerStyle: { backgroundColor: "#EFF1F0" },
+    //     }}
+    //   />
+    // </Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName="Thực đơn"
+      screenOptions={{ header: (props) => <CustomNavigationBar {...props} /> }}
+    >
+      <Stack.Screen name="Thực đơn" component={Menu} />
+      <Stack.Screen name="Chi tiết" component={ItemDetail} />
+    </Stack.Navigator>
+  );
+};
 
 export default IndexMenu;
