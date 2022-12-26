@@ -163,6 +163,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import ListProductProvider from "./context/listProductContext";
 import MainPage from "./component/mainPage/mainPage";
+// import Menu from "./component/menu/menu";
 import Menu from "./component/menu/indexMenu";
 import Cart from "./component/cart/cart";
 import Other from "./component/general/general";

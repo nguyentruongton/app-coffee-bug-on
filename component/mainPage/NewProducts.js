@@ -15,12 +15,12 @@ const NewProducts = () => {
     <View>
       <Text
         style={{
-          fontSize: 28,
+          fontSize: 24,
           paddingTop: 16,
           paddingLeft: 16,
           fontWeight: "600",
           textTransform: "uppercase",
-          color: "#3D685E",
+          // color: "#3D685E",
         }}
       >
         Sản phẩm mới
@@ -54,7 +54,7 @@ const NewProducts = () => {
             <Text style={styles.price}>25.000 đ</Text>
           </View>
           <Card.Actions>
-            <Button onPress={() => {}} icon={"plus"} mode="outlined">
+            <Button onPress={() => {}} icon={"cart"} mode="outlined">
               Thêm
             </Button>
           </Card.Actions>
@@ -78,7 +78,7 @@ const NewProducts = () => {
             <Text style={styles.price}>25.000 đ</Text>
           </View>
           <Card.Actions>
-            <Button onPress={() => {}} icon={"plus"} mode="outlined">
+            <Button onPress={() => {}} icon={"cart"} mode="outlined">
               Thêm
             </Button>
           </Card.Actions>
@@ -102,7 +102,7 @@ const NewProducts = () => {
             <Text style={styles.price}>25.000 đ</Text>
           </View>
           <Card.Actions>
-            <Button onPress={() => {}} icon={"plus"} mode="outlined">
+            <Button onPress={() => {}} icon={"cart"} mode="outlined">
               Thêm
             </Button>
           </Card.Actions>
@@ -126,7 +126,7 @@ const NewProducts = () => {
             <Text style={styles.price}>25.000 đ</Text>
           </View>
           <Card.Actions>
-            <Button onPress={() => {}} icon={"plus"} mode="outlined">
+            <Button onPress={() => {}} icon={"cart"} mode="outlined">
               Thêm
             </Button>
           </Card.Actions>
