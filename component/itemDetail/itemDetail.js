@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
+import styles from "../../BugOnStyles";
 import { Text, TouchableOpacity, View, Image } from "react-native";
 import { ListProductContext } from "../../context/listProductContext";
 import { btoa } from "react-native-quick-base64";
+import { RadioButton, Button } from "react-native-paper";
 import axios from "axios";
 
 const ItemDetail = ({ route }) => {
@@ -25,30 +27,71 @@ const ItemDetail = ({ route }) => {
 
   return (
     <View>
-      <Text>Ma: {route.params.id}</Text>
+      {/* <Text>Ma: {route.params.id}</Text> */}
       <Image
         style={{
-          width: 100,
-          height: 50,
-          resizeMode: "cover",
-          borderRadius: 10,
-          marginRight: 15,
+          width: "auto",
+          height: 350,
+          resizeMode: "center",
+          borderBottomLeftRadius: 16,
+          borderBottomRightRadius: 16,
+          marginBottom: 16,
         }}
         source={{
           uri: `data:image/png;base64,${route.params.url}`,
         }}
       />
-      <Text>Tên sản phẩm: {route.params.name}</Text>
-      <Text>Giá: {route.params.price}</Text>
-      <Text>Chọn size:</Text>
-      {sizeProduct.map((item) => (
-        <TouchableOpacity key={item._id} onPress={() => setSize(item.name)}>
-          <Text>{item.name}</Text>
-        </TouchableOpacity>
-      ))}
-      <TouchableOpacity onPress={add}>
-        <Text>Thêm giỏ hàng</Text>
-      </TouchableOpacity>
+      <View style={{ paddingHorizontal: 16 }}>
+        <Text style={styles.namePro}>{route.params.name}</Text>
+        <Text style={styles.price}>{route.params.price} đ</Text>
+        <View
+          style={{
+            display: "flex",
+            // flexWrap: "wrap",
+            flexDirection: "row",
+            marginTop: 16,
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ fontSize: 16 }}>Kích thước</Text>
+          <View style={{ flexDirection: "row" }}>
+            {sizeProduct.map((item) => (
+              // <TouchableOpacity key={item._id} onPress={() => setSize(item.name)}>
+              //   <Text>{item.name}</Text>
+              // </TouchableOpacity>
+              // <RadioButton
+              //   key={item._id}
+              //   value={item.name}
+              //   status={size === "S" ? "checked" : "unchecked"}
+              //   onPress={() => setSize(item.name)}
+              // >
+              //   {item.name}
+              // </RadioButton>
+              <RadioButton.Group
+                key={item._id}
+                onValueChange={(size) => setSize(size)}
+                value={size}
+              >
+                <RadioButton.Item
+                  labelStyle={{
+                    textAlign: "right",
+                  }}
+                  label={item.name}
+                  value={item.name}
+                />
+              </RadioButton.Group>
+            ))}
+          </View>
+        </View>
+        <Button
+          style={{ marginTop: 16 }}
+          icon={"cart"}
+          mode="contained"
+          onPress={add}
+        >
+          Thêm giỏ vào hàng
+        </Button>
+      </View>
     </View>
   );
 };
