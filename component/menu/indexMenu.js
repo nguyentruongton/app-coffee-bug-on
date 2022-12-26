@@ -2,6 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Menu from "./menu";
 import ItemDetail from "../itemDetail/itemDetail";
+
 const IndexMenu = () => {
      const Stack = createNativeStackNavigator();
     return(
