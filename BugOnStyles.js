@@ -13,6 +13,12 @@ module.exports = StyleSheet.create({
     color: "#444149",
   },
   namePro: { fontSize: 22, fontWeight: "600", marginBottom: 2 },
+  nameProCart: {
+    fontSize: 22,
+    fontWeight: "600",
+    marginLeft: 8,
+  },
   nameCategory: { fontSize: 14, fontWeight: "200", marginBottom: 12 },
   price: { fontSize: 18, fontWeight: "500" },
+  priceCart: { fontSize: 18, fontWeight: "500", marginLeft: 8 },
 });

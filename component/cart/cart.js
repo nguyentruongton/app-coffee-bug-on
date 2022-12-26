@@ -1,143 +1,281 @@
-import react,{useContext, useEffect, useState} from 'react';
-import { ListProductContext } from '../../context/listProductContext';
-import { Button, ScrollView, Text, View , TextInput, TouchableOpacity } from "react-native";
-import moment from 'moment'
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import react, { useContext, useState } from "react";
+import styles from "../../BugOnStyles";
+import { ListProductContext } from "../../context/listProductContext";
+import { ScrollView, Text, View } from "react-native";
+import moment from "moment";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  Appbar,
+  Button,
+  IconButton,
+  TextInput,
+  MD3Colors,
+  Card,
+  Chip,
+} from "react-native-paper";
 
 const Cart = () => {
-    const { products, delProduct, upAmount, downAmount, clearCart } = useContext(ListProductContext);
-    var sum = 0;
-    const [price, setPrice] = useState(0)
-    const [userid, setUserId] = useState('')
-    const [namediscount, setNameDisCount] = useState('')
-    const [discountid, setDisCountId] = useState('')
-    const [discountprice, setDiscountPrice] = useState(0)
-    const [statuspayment, setStatusPayment] = useState(false)
-    const [statusdelivery, setStatusDelivery] = useState(false)
-    products.forEach(item =>{
-        sum += item.amount * item.price;
-    });
-    const searchdiscount = () => {
-        axios
-          .post(`https://coffeebugon.onrender.com/discount/one`, { name: namediscount })
-          .then((res) => {
-            var today = moment().format('DD-MM-YYYY')
-            var startday = moment(res.data.startdate).format('DD-MM-YYYY')
-            var endday = moment(res.data.enddate).format('DD-MM-YYYY')
-    
-            if (startday <= today && today <= endday) {
-              setNameDisCount(res.data.name)
-              setDisCountId(res.data._id)
-              setDiscountPrice(res.data.price)
-              alert('Giảm giá thành công !');
-            } else {
-              alert('Giảm giá không thành công !');
-            }
-          })
-      }
+  const { products, delProduct, upAmount, downAmount, clearCart } =
+    useContext(ListProductContext);
+  var sum = 0;
+  const [price, setPrice] = useState(0);
+  const [userid, setUserId] = useState("");
+  const [namediscount, setNameDisCount] = useState("");
+  const [discountid, setDisCountId] = useState("");
+  const [discountprice, setDiscountPrice] = useState(0);
+  const [statuspayment, setStatusPayment] = useState(false);
+  const [statusdelivery, setStatusDelivery] = useState(false);
+  products.forEach((item) => {
+    sum += item.amount * item.price;
+  });
+  const searchdiscount = () => {
+    axios
+      .post(`https://coffeebugon.onrender.com/discount/one`, {
+        name: namediscount,
+      })
+      .then((res) => {
+        var today = moment().format("DD-MM-YYYY");
+        var startday = moment(res.data.startdate).format("DD-MM-YYYY");
+        var endday = moment(res.data.enddate).format("DD-MM-YYYY");
 
-      const addOrder = async () => {
-        // if (AsyncStorage.getItem('token')) {
-        //   alert('Mời bạn đăng nhập!!!')
-        // }
-        if (!AsyncStorage.getItem('token')) {
-          const infoUser = await axios.get(`https://coffeebugon.onrender.com/user/${userid}`)
-          if (infoUser.data) {
-            if (infoUser.data.numberphone == '' && infoUser.data.address == '') {
-              alert('Vui lòng cập nhật SĐT và địa chỉ đầy đủ!')
-            } else {
-              const rec = await axios.post(`https://coffeebugon.onrender.com/receipt`, {
-                userid,
-                price,
-                products,
-                discountid,
-                discountprice,
-                statuspayment,
-                statusdelivery
-              })
-              setNameDisCount('')
-              setDiscountPrice(0)
-              setDisCountId('')
-              if (rec) {
-                alert('Thanh toán thành công!')
-                clearCart()
-              } else {
-                alert('Vui lòng thử lại sau')
-              }
+        if (startday <= today && today <= endday) {
+          setNameDisCount(res.data.name);
+          setDisCountId(res.data._id);
+          setDiscountPrice(res.data.price);
+          alert("Giảm giá thành công !");
+        } else {
+          alert("Giảm giá không thành công !");
+        }
+      });
+  };
+
+  const addOrder = async () => {
+    // if (AsyncStorage.getItem('token')) {
+    //   alert('Mời bạn đăng nhập!!!')
+    // }
+    if (!AsyncStorage.getItem("token")) {
+      const infoUser = await axios.get(
+        `https://coffeebugon.onrender.com/user/${userid}`
+      );
+      if (infoUser.data) {
+        if (infoUser.data.numberphone == "" && infoUser.data.address == "") {
+          alert("Vui lòng cập nhật SĐT và địa chỉ đầy đủ!");
+        } else {
+          const rec = await axios.post(
+            `https://coffeebugon.onrender.com/receipt`,
+            {
+              userid,
+              price,
+              products,
+              discountid,
+              discountprice,
+              statuspayment,
+              statusdelivery,
             }
+          );
+          setNameDisCount("");
+          setDiscountPrice(0);
+          setDisCountId("");
+          if (rec) {
+            alert("Thanh toán thành công!");
+            clearCart();
+          } else {
+            alert("Vui lòng thử lại sau");
           }
-        }else{
-            alert('Mời bạn đăng nhập!!!')
         }
       }
-    return (
-        <View>
-            {products.length > 0?
-            <ScrollView>
+    } else {
+      alert("Mời bạn đăng nhập!!!");
+    }
+  };
+  return (
+    <View>
+      {/* <Appbar.Header>
+        <Appbar.Content titleStyle={styles.titleAppBar} title="Cà phê BUG ỔN" />
+        <Appbar.Action icon="magnify" onPress={() => {}} />
+      </Appbar.Header> */}
+      {products.length > 0 ? (
+        <ScrollView>
+          <View style={{ padding: 16 }}>
+            <Button
+              style={{
+                // width: "50%",
+                // flexDirection: "row",
+                // justifyContent: "flex-end",
+                marginBottom: 16,
+              }}
+              icon={"delete"}
+              mode="contained-tonal"
+              onPress={() => {
+                clearCart();
+                setNameDisCount("");
+                setDisCountId("");
+                setDiscountPrice(0);
+              }}
+            >
+              Xóa tất cả
+            </Button>
+            {products.map((n) => (
+              <Card
+                mode="contained"
+                style={{ padding: 12, marginBottom: 8 }}
+                key={n.name}
+              >
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={styles.nameProCart}>{n.name}</Text>
+                  <IconButton
+                    icon={"delete"}
+                    size={20}
+                    mode="outlined"
+                    iconColor={MD3Colors.error50}
+                    onPress={() => delProduct(n.name)}
+                  >
+                    Xóa
+                  </IconButton>
+                </View>
+                <Text style={styles.priceCart}>{n.price}đ</Text>
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                  }}
+                >
+                  <IconButton
+                    size={12}
+                    mode="outlined"
+                    icon={"minus"}
+                    onPress={() => downAmount(n.name)}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "500",
+                      alignItems: "center",
+                      display: "flex",
+                      justifyContent: "center",
+                      marginHorizontal: 6,
+                    }}
+                  >
+                    {n.amount}
+                  </Text>
+                  <IconButton
+                    size={12}
+                    mode="outlined"
+                    icon={"plus"}
+                    onPress={() => upAmount(n.name)}
+                  />
+                </View>
+              </Card>
+            ))}
+            <View
+              style={{
+                marginTop: 12,
+                flexDirection: "column",
+                fontSize: 24,
+                backgroundColor: "#E8DEF9",
+                padding: 16,
+                borderRadius: 12,
+                marginBottom: 16,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: "400",
+                }}
+              >
+                Tạm tính{" "}
+                <Text style={{ fontSize: 18, fontWeight: "500" }}>{sum}đ</Text>
+              </Text>
+              <View>
+                <Text style={{ fontSize: 14, marginTop: 4, marginBottom: 8 }}>
+                  Số tiền giảm giá{" "}
+                  <Text style={{ fontSize: 16, fontWeight: "500" }}>
+                    {discountprice}đ
+                  </Text>
+                </Text>
                 <View>
-                    <TouchableOpacity onPress={() => {
-                        clearCart()
-                        setNameDisCount('')
-                        setDisCountId('')
-                        setDiscountPrice(0)
-                        }}>
-                        <Text>Xóa toàn bộ</Text>
-                    </TouchableOpacity>
-                    {
-                        products.map((n) => (
-                            <View key={n.name}>
-                                <Text>{n.name}</Text>
-                                <Text>{n.price}</Text>
-                                <TouchableOpacity
-                                    onPress={()=>upAmount(n.name)}
-                                    >
-                                    <Text>+</Text>
-                                </TouchableOpacity>
-                                <Text>{n.amount}</Text>
-                                <TouchableOpacity
-                                    onPress={()=>downAmount(n.name)}
-                                    >
-                                    <Text>-</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={()=>delProduct(n.name)}
-                                    >
-                                    <Text>Xóa</Text>
-                                </TouchableOpacity>
-                            </View>
-                        ))
-                    }
-                    <Text>Tổng đơn hàng: {sum}</Text>
-                </View>    
-                <View>
-                    <Text>Nhập mã giảm giá {discountprice}</Text>
-                    <Text>Số tiền thanh toán {sum-discountprice}</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
                     <TextInput
-                        onChangeText={setNameDisCount}
-                        style={{height: 40,margin: 12,borderWidth: 1,padding: 10}}
-                        value={namediscount}
+                      placeholder="Nhập mã giảm giá (nếu có)"
+                      mode="outlined"
+                      onChangeText={setNameDisCount}
+                      style={{ marginBottom: 8, flex: 1, marginRight: 4 }}
+                      value={namediscount}
                     />
-                    <TouchableOpacity onPress={() => {
-                        setNameDisCount('')
-                        setDisCountId('')
-                        setDiscountPrice(0)
-                        }
-                    }>
-                        <Text>Xóa mã</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => searchdiscount()}>
-                        <Text>Gửi</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => addOrder()}>
-                        <Text>Thanh toán</Text>
-                    </TouchableOpacity>
-                </View> 
+                    <IconButton
+                      style={{
+                        flex: 0,
+                      }}
+                      icon={"delete"}
+                      size={32}
+                      mode="outlined"
+                      onPress={() => {
+                        setNameDisCount("");
+                        setDisCountId("");
+                        setDiscountPrice(0);
+                      }}
+                    />
+                  </View>
+                  <View style={{ flexDirection: "row" }}>
+                    <Button mode="contained" onPress={() => searchdiscount()}>
+                      Áp dụng
+                    </Button>
+                  </View>
+                </View>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "400",
+                    marginTop: 12,
+                  }}
+                >
+                  Tổng thanh toán{" "}
+                  <Text style={{ fontSize: 22, fontWeight: "500" }}>
+                    {sum - discountprice}đ
+                  </Text>
+                </Text>
+              </View>
+            </View>
+            <Button icon={"cash"} mode="contained" onPress={() => addOrder()}>
+              Thanh toán
+            </Button>
+          </View>
         </ScrollView>
-            :
-            <Text>Giỏ hàng rỗng</Text>
-            }
+      ) : (
+        <View>
+          <Text
+            style={{
+              fontSize: 24,
+              fontWeight: "500",
+              color: "#444149",
+              textAlign: "center",
+              padding: 32,
+              textTransform: "uppercase",
+            }}
+          >
+            Giỏ hàng rỗng
+          </Text>
         </View>
-    )
+      )}
+    </View>
+  );
 };
-export default Cart
+export default Cart;
