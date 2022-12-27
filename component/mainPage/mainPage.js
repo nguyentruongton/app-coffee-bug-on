@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../BugOnStyles";
 import { View, ScrollView, StatusBar, SafeAreaView } from "react-native";
-import Panel from "./Panel";
+import Panel from "./panel";
 import { Appbar } from "react-native-paper";
 import NewProducts from "./NewProducts";
 import Introduce from "./Introduce";

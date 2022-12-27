@@ -20,8 +20,13 @@ module.exports = StyleSheet.create({
     marginLeft: 8,
   },
   nameCategory: { fontSize: 14, fontWeight: "200", marginBottom: 12 },
-  price: { fontSize: 18, fontWeight: "500" },
-  priceCart: { fontSize: 18, fontWeight: "500", marginLeft: 8 },
+  price: { fontSize: 18, fontWeight: "500", letterSpacing: 0.5 },
+  priceCart: {
+    fontSize: 18,
+    fontWeight: "500",
+    marginLeft: 8,
+    letterSpacing: 0.5,
+  },
   thumbContainer: {
     width: "100%",
     height: 400,

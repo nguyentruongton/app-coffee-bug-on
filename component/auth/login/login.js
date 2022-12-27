@@ -1,30 +1,33 @@
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { TextInput, Text, Button } from "react-native-paper";
+import { TextInput, Text, Button, Dialog } from "react-native-paper";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
 
-import jwtDecode from 'jwt-decode';
-import axios from 'axios';
-const Login = ({navigation}) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+const Login = () => {
+  const [show, setShow] = useState(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const loginUser = async () => {
-        const Auth = await axios.post(`https://coffeebugon.onrender.com/auth/login`, {
-          username,
-          password,
-        }).catch(err => {
-          alert('Bạn đã nhập sai tên đăng nhập hoặc mật khẩu. Vui lòng thử lại!');
-        })
-        if (Auth.data.confirmemail == true) {
-          alert('Đăng nhập thành công!')
-          await AsyncStorage.setItem('token', Auth.data.accessToken)
-          setUsername('')
-          setPassword('')
-          navigation.navigate('Cá nhân');
-        } else{
-          alert('Vui lòng xác thực tài khoản để đăng nhập.')
-        }
-  }
+    const Auth = await axios
+      .post(`https://coffeebugon.onrender.com/auth/login`, {
+        username,
+        password,
+      })
+      .catch((err) => {
+        alert("Bạn đã nhập sai tên đăng nhập hoặc mật khẩu. Vui lòng thử lại!");
+      });
+    if (Auth.data.confirmemail == true) {
+      alert("Đăng nhập thành công!");
+      await AsyncStorage.setItem("token", Auth.data.accessToken);
+      setUsername("");
+      setPassword("");
+      navigation.navigate("Cá nhân");
+    } else {
+      alert("Vui lòng xác thực tài khoản để đăng nhập.");
+    }
+  };
   return (
     <View style={{ padding: 16 }}>
       <TextInput
@@ -39,6 +42,14 @@ const Login = ({navigation}) => {
         onChangeText={setPassword}
         value={password}
         label="Mật khẩu"
+        secureTextEntry={show}
+        right={
+          show === true ? (
+            <TextInput.Icon icon="eye" onPress={() => setShow(false)} />
+          ) : (
+            <TextInput.Icon icon="eye-off" onPress={() => setShow(true)} />
+          )
+        }
       />
       <Button
         style={{ marginTop: 24, marginBottom: 12 }}
@@ -47,6 +58,18 @@ const Login = ({navigation}) => {
       >
         Đăng nhập
       </Button>
+
+      <Portall>
+        <Dialog visible={visible} onDismiss={hideDialog}>
+          <Dialog.Title>Alert</Dialog.Title>
+          <Dialog.Content>
+            <Paragraph>This is simple dialog</Paragraph>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={hideDialog}>Done</Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portall>
 
       <Button style={{ marginBottom: 12 }} onPress={() => {}}>
         Tạo tài khoản
