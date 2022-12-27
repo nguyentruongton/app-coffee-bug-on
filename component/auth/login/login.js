@@ -2,30 +2,29 @@ import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { TextInput, Text, Button } from "react-native-paper";
-import jwtDecode from "jwt-decode";
-import axios from "axios";
 
-const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+import jwtDecode from 'jwt-decode';
+import axios from 'axios';
+const Login = ({navigation}) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const loginUser = async () => {
-    const Auth = await axios
-      .post(`https://coffeebugon.onrender.com/auth/login`, {
-        username,
-        password,
-      })
-      .catch((err) => {
-        alert("Bạn đã nhập sai tên đăng nhập hoặc mật khẩu. Vui lòng thử lại!");
-      });
-    if (Auth.data.confirmemail == true) {
-      alert("Đăng nhập thành công!");
-      await AsyncStorage.setItem("token", Auth.data.accessToken);
-      setUsername("");
-      setPassword("");
-    } else {
-      alert("Vui lòng xác thực tài khoản để đăng nhập.");
-    }
-  };
+        const Auth = await axios.post(`https://coffeebugon.onrender.com/auth/login`, {
+          username,
+          password,
+        }).catch(err => {
+          alert('Bạn đã nhập sai tên đăng nhập hoặc mật khẩu. Vui lòng thử lại!');
+        })
+        if (Auth.data.confirmemail == true) {
+          alert('Đăng nhập thành công!')
+          await AsyncStorage.setItem('token', Auth.data.accessToken)
+          setUsername('')
+          setPassword('')
+          navigation.navigate('Cá nhân');
+        } else{
+          alert('Vui lòng xác thực tài khoản để đăng nhập.')
+        }
+  }
   return (
     <View style={{ padding: 16 }}>
       <TextInput
