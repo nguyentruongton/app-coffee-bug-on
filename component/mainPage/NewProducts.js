@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect ,useState } from "react";
 import { Text, View, Dimensions } from "react-native";
 import { Button, Card } from "react-native-paper";
 import { btoa } from "react-native-quick-base64";
 import styles from "../../BugOnStyles";
-
+import axios from "axios";
 const NewProducts = () => {
   const { width } = Dimensions.get("window");
-
+  const [product, setProduct] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`https://coffeebugon.onrender.com/product`)
+      .then((res) => {
+        setProduct(res.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <View>
       <Text
@@ -21,7 +29,8 @@ const NewProducts = () => {
       >
         Sản phẩm mới
       </Text>
-      <View
+      {product.filter((item, idx) => idx < 4).sort((a, b) => b.createdAt - a.createdAt).map((item)=>(
+        <View
         style={{
           paddingHorizontal: 16,
           marginTop: 16,
@@ -41,16 +50,21 @@ const NewProducts = () => {
           <Card.Cover
             resizeMode="center"
             source={{
-              uri: "https://product.hstatic.net/1000075078/product/1665655345_tch-sua-da_e0737a64b29e452f9c7eadb23300821a.jpg",
+              uri: `data:image/png;base64,${btoa(
+                new Uint8Array(item.image.data.data).reduce(function (data, byte) {
+                  return data + String.fromCharCode(byte);
+                }, "")
+              )}`,
             }}
           />
           <View style={{ padding: 16 }}>
-            <Text style={styles.namePro}>Cà phê sữa đá</Text>
-            <Text style={styles.nameCategory}>Cà phê Việt Nam</Text>
-            <Text style={styles.price}>25.000 đ</Text>
+            <Text style={styles.namePro}>{item.name}</Text>
+            <Text style={styles.nameCategory}>{item.categoryproductid.name}</Text>
+            <Text style={styles.price}>{item.price} đ</Text>
           </View>
         </Card>
       </View>
+      ))}
     </View>
   );
 };
