@@ -49,7 +49,7 @@ const Menu = ({ navigation }) => {
   });
 
   return (
-    <View style={{ padding: 16 }}>
+    <View style={{ padding: 16, marginBottom: 75 }}>
       <View style={{ flexWrap: "wrap", flexDirection: "row" }}>{cateList}</View>
       <View style={{ marginBottom: 8 }} />
       {
