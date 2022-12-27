@@ -10,7 +10,7 @@ const CustomNavigationBar = ({ navigation, back }) => {
     <Appbar.Header>
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
       <Appbar.Content titleStyle={styles.titleAppBar} title="Thực đơn" />
-      <Appbar.Action icon={"filter"} />
+      {/* <Appbar.Action icon={"filter"} /> */}
     </Appbar.Header>
   );
 };

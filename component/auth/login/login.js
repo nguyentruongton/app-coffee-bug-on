@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { TextInput, Text, Button } from "react-native-paper";
+
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 const Login = ({navigation}) => {
@@ -39,7 +40,11 @@ const Login = ({navigation}) => {
         value={password}
         label="Mật khẩu"
       />
-      <Button style={{ marginTop: 24, marginBottom: 12 }} mode="contained" onPress={() => loginUser()}>
+      <Button
+        style={{ marginTop: 24, marginBottom: 12 }}
+        mode="contained"
+        onPress={() => loginUser()}
+      >
         Đăng nhập
       </Button>
 

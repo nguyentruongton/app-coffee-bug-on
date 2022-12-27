@@ -1,14 +1,14 @@
 import React from "react";
 import styles from "../../BugOnStyles";
-import { View, ScrollView, StatusBar } from "react-native";
-import Panel from "./panel";
+import { View, ScrollView, StatusBar, SafeAreaView } from "react-native";
+import Panel from "./Panel";
 import { Appbar } from "react-native-paper";
 import NewProducts from "./NewProducts";
 import Introduce from "./Introduce";
 
 const MainPage = () => {
   return (
-    <View>
+    <SafeAreaView>
       <StatusBar currentHeight />
       <Appbar.Header>
         <Appbar.Content titleStyle={styles.titleAppBar} title="Cà phê BUG ỔN" />
@@ -19,7 +19,7 @@ const MainPage = () => {
         <NewProducts />
         <Introduce />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

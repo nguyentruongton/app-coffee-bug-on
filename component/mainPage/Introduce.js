@@ -1,5 +1,7 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
+import styles from "../../BugOnStyles";
+import NewProducts from "./NewProducts";
 
 const Introduce = () => {
   return (
@@ -13,7 +15,7 @@ const Introduce = () => {
           fontSize: 24,
           fontWeight: "600",
           textTransform: "uppercase",
-          // color: "#3D685E",
+          color: "#444149",
           marginBottom: 16,
         }}
       >
@@ -23,10 +25,10 @@ const Introduce = () => {
         <Image
           style={{
             width: "100%",
-            height: 110,
-            // height: height / 7,
+            height: 100,
             resizeMode: "contain",
             marginBottom: 4,
+            // overflow: "visible",
           }}
           source={{
             uri: `https://file.hstatic.net/1000075078/file/cloudtea_tagline_1_c39d8fd0d46b4144be9cebd05e318796.png`,
@@ -36,8 +38,8 @@ const Introduce = () => {
           style={{
             width: "100%",
             height: 400,
-            // height: height / 3,
             resizeMode: "contain",
+            // overflow: "visible",
           }}
           source={{
             uri: `https://file.hstatic.net/1000075078/file/cloudtea_1_5dc49fd17ba04030993d2f797dc570f2.png`,
@@ -46,7 +48,7 @@ const Introduce = () => {
         <Text
           style={{
             fontSize: 14,
-            fontWeight: "400",
+            fontWeight: "200",
             textAlign: "justify",
             marginTop: 12,
             lineHeight: 20,
