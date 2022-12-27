@@ -21,13 +21,6 @@ import {
 
 const Cart = () => {
   var token = AsyncStorage.getItem("token");
-  //   const InputData = async () => {
-  //       token = await AsyncStorage.getItem('token');
-  //       console.log(token);
-  //   }
-  //   useEffect(()=>{
-  //     InputData();
-  // },[])
   const { products, delProduct, upAmount, downAmount, clearCart } =
     useContext(ListProductContext);
   var sum = 0;
@@ -92,8 +85,6 @@ const Cart = () => {
           }
         }
       }
-      alert("Bạn đã đăng nhập rồi");
-      // console.log(jwtDecode(token._z).id);
     } else {
       alert("Bạn chưa đăng nhập");
     }

@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import styles from "./BugOnStyles";
 
 import ListProductProvider from "./context/listProductContext";
-import MainPage from "./component/mainPage/mainPage";
+import MainPage from "./component/mainPage/indexMenu";
 import Menu from "./component/menu/indexMenu";
 import General from "./component/general/indexMenu";
 import Cart from "./component/cart/cart";

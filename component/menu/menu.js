@@ -26,12 +26,12 @@ const Menu = ({ navigation }) => {
       .catch((error) => console.log(error));
   }, []);
 
-  const [select, setSelect] = useState(false);
-
+  // const [select, setSelect] = useState(false);
+  const [selectName, setSelectName] = useState('');
   const cateList = category.map((item) => {
     return (
       <Chip
-        selected={select}
+        // selected={select}
         key={item._id}
         style={{
           marginBottom: 8,
@@ -40,21 +40,38 @@ const Menu = ({ navigation }) => {
         }}
         mode="flat"
         onPress={() => {
-          setSelect(!select);
+          // setSelect(!select);
+          setSelectName(item.name)
         }}
       >
         {item.name}
       </Chip>
     );
   });
-
+  var listproducts = selectName === '' ? (product): (product.filter((item) => item.categoryproductid.name == selectName))
   return (
     <View style={{ padding: 16, marginBottom: 75 }}>
-      <View style={{ flexWrap: "wrap", flexDirection: "row" }}>{cateList}</View>
+      <View style={{ flexWrap: "wrap", flexDirection: "row" }}>
+      <Chip
+        key={0}
+        style={{
+          marginBottom: 8,
+          fontWeight: "200",
+          marginRight: 6,
+        }}
+        mode="flat"
+        onPress={() => {
+          setSelectName('')
+        }}
+      >
+        Tất cả
+      </Chip>
+      {cateList}
+      </View>
       <View style={{ marginBottom: 8 }} />
       {
         <FlatList
-          data={product}
+          data={listproducts}
           renderItem={({ item }) => (
             <ProductItem
               onPress={() => {
