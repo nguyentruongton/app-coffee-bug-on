@@ -5,6 +5,7 @@ import { ScrollView, Text, View } from "react-native";
 import moment from "moment";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import jwtDecode from 'jwt-decode';
 import {
   Appbar,
   Button,
@@ -16,6 +17,7 @@ import {
 } from "react-native-paper";
 
 const Cart = () => {
+  const token = AsyncStorage.getItem('token');
   const { products, delProduct, upAmount, downAmount, clearCart } =
     useContext(ListProductContext);
   var sum = 0;
@@ -49,14 +51,10 @@ const Cart = () => {
         }
       });
   };
-
   const addOrder = async () => {
-    // if (AsyncStorage.getItem('token')) {
-    //   alert('Mời bạn đăng nhập!!!')
-    // }
-    if (!AsyncStorage.getItem("token")) {
+    if (!token || token._z != null) {
       const infoUser = await axios.get(
-        `https://coffeebugon.onrender.com/user/${userid}`
+        `https://coffeebugon.onrender.com/user/${jwtDecode(token._z).id}`
       );
       if (infoUser.data) {
         if (infoUser.data.numberphone == "" && infoUser.data.address == "") {
@@ -65,13 +63,13 @@ const Cart = () => {
           const rec = await axios.post(
             `https://coffeebugon.onrender.com/receipt`,
             {
-              userid,
-              price,
-              products,
-              discountid,
-              discountprice,
-              statuspayment,
-              statusdelivery,
+              userid: jwtDecode(token._z).id,
+              price: sum - discountprice,
+              products: products,
+              discountid: discountid,
+              discountprice: discountprice,
+              statuspayment: statuspayment,
+              statusdelivery: statusdelivery,
             }
           );
           setNameDisCount("");
@@ -85,8 +83,10 @@ const Cart = () => {
           }
         }
       }
+      // alert("Bạn đã đăng nhập rồi!!!");
+      // console.log(jwtDecode(token._z).id);
     } else {
-      alert("Mời bạn đăng nhập!!!");
+      alert("Bạn chưa đăng nhập!!!");
     }
   };
   return (
