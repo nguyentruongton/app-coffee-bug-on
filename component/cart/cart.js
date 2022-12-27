@@ -1,11 +1,11 @@
 import react, { useContext, useEffect, useState } from "react";
 import styles from "../../BugOnStyles";
 import { ListProductContext } from "../../context/listProductContext";
-import { ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import moment from "moment";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import jwtDecode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 import {
   Appbar,
   Button,
@@ -13,11 +13,18 @@ import {
   TextInput,
   MD3Colors,
   Card,
-  Chip,
+  Portal,
+  Dialog,
+  Paragraph,
+  Provider,
 } from "react-native-paper";
 
 const Cart = () => {
-  var token = AsyncStorage.getItem('token');
+  // const [visible, setVisible] = useState(false);
+  // const [success, setSuccess] = useState(false);
+  // const [login, setLogin] = useState(false);
+  // const hideDialog = () => setVisible(!visible);
+  var token = AsyncStorage.getItem("token");
   //   const InputData = async () => {
   //       token = await AsyncStorage.getItem('token');
   //       console.log(token);
@@ -33,6 +40,7 @@ const Cart = () => {
   const [discountprice, setDiscountPrice] = useState(0);
   const [statuspayment, setStatusPayment] = useState(false);
   const [statusdelivery, setStatusDelivery] = useState(false);
+
   products.forEach((item) => {
     sum += item.amount * item.price;
   });
@@ -81,20 +89,28 @@ const Cart = () => {
           setDiscountPrice(0);
           setDisCountId("");
           if (rec) {
-            alert("Thanh toán thành công!");
+            alert("Thanh toán thành công");
+            // setSuccess(true);
+            // setVisible(true);
             clearCart();
           } else {
             alert("Vui lòng thử lại sau");
+            // setSuccess(false);
+            // setVisible(true);
           }
         }
       }
       // alert("Bạn đã đăng nhập rồi!!!");
       // console.log(jwtDecode(token._z).id);
     } else {
-      alert("Bạn chưa đăng nhập!!!");
+      // setLogin(true);
+      // setVisible(true);
+      alert("Bạn chưa đăng nhập");
     }
   };
+
   return (
+    // <Provider>
     <View>
       <Appbar.Header>
         <Appbar.Content titleStyle={styles.titleAppBar} title="Giỏ hàng" />
@@ -108,6 +124,7 @@ const Cart = () => {
           }}
         />
       </Appbar.Header>
+
       <View>
         {products.length > 0 ? (
           <ScrollView>
@@ -273,13 +290,32 @@ const Cart = () => {
               <Button icon={"cash"} mode="contained" onPress={() => addOrder()}>
                 Thanh toán
               </Button>
+              {/* <Portal>
+                  <Dialog visible={visible} onDismiss={hideDialog}>
+                    <Dialog.Title>Thông báo</Dialog.Title>
+                    <Dialog.Content>
+                      {login === true && (
+                        <Paragraph>Bạn chưa đăng nhập.</Paragraph>
+                      )}
+                      {success === true && (
+                        <Paragraph>Thanh toán thành công.</Paragraph>
+                      )}
+                      {success === false && (
+                        <Paragraph>Thanh toán thất bại.</Paragraph>
+                      )}
+                    </Dialog.Content>
+                    <Dialog.Actions>
+                      <Button onPress={hideDialog}>OK</Button>
+                    </Dialog.Actions>
+                  </Dialog>
+                </Portal> */}
             </View>
           </ScrollView>
         ) : (
           <View>
             <Text
               style={{
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: "500",
                 color: "#444149",
                 textAlign: "center",
@@ -289,10 +325,16 @@ const Cart = () => {
             >
               Giỏ hàng rỗng
             </Text>
+            <Image
+              style={{ width: "100%" }}
+              resizeMode="center"
+              source={require("../../assets/images/Empty.png")}
+            />
           </View>
         )}
       </View>
     </View>
+    // </Provider>
   );
 };
 export default Cart;
