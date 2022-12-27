@@ -9,7 +9,7 @@ const CustomNavigationBar = ({ navigation, back }) => {
   return (
     <Appbar.Header>
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content titleStyle={styles.titleAppBar} title="Chi tiết sản phẩm" />
+      <Appbar.Content titleStyle={styles.titleAppBar} title="Thực đơn" />
     </Appbar.Header>
   );
 };
@@ -18,10 +18,10 @@ const IndexMenu = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator
-      initialRouteName="Chi tiết sản phẩm"
+      initialRouteName="Thực đơn"
       screenOptions={{ header: (props) => <CustomNavigationBar {...props} /> }}
     >
-      <Stack.Screen name="Trang chủ" component={MainPage} options={{headerShown:false}} />
+      <Stack.Screen name="Trang Chính" component={MainPage} options={{headerShown:false}} />
       <Stack.Screen name="Chi tiết" component={ItemDetail} options={{headerShown:true}}/>
     </Stack.Navigator>
   );

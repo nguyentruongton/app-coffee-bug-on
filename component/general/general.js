@@ -8,7 +8,7 @@ const General = ({ navigation }) => {
   var token;
   const InputData = async () => {
     token = await AsyncStorage.getItem("token");
-    console.log(token);
+    // console.log(token);
   };
   const logout = () => {
     AsyncStorage.clear();
