@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../BugOnStyles";
-import { Text, View, Image, TouchableOpacity, Dimensions } from "react-native";
+import { Text, View, Dimensions } from "react-native";
 import { btoa } from "react-native-quick-base64";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
+import { Button, Card } from "react-native-paper";
+import axios from "axios";
 
 const ProductItem = (props) => {
   const { _id, name, price, image } = props.product; //destructuring an object
   const { onPress } = props;
   debugger;
   const { height, width } = Dimensions.get("window");
+
+  const [product, setProduct] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`https://coffeebugon.onrender.com/product`)
+      .then((res) => {
+        setProduct(res.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`https://coffeebugon.onrender.com/category`)
+      .then((res) => {
+        setCategory(res.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <Card
