@@ -43,7 +43,7 @@ const ItemDetail = ({ route }) => {
       />
       <View style={{ paddingHorizontal: 16 }}>
         <Text style={styles.namePro}>{route.params.name}</Text>
-        <Text style={styles.price}>{route.params.price} đ</Text>
+        <Text style={styles.price}>{route.params.price}đ</Text>
         <View
           style={{
             display: "flex",

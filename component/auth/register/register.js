@@ -1,49 +1,58 @@
-import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState } from "react";
+import { View } from "react-native";
+import { TextInput, Button } from "react-native-paper";
 const Register = () => {
+  const [show, setShow] = useState(true);
+
   return (
-    <View>
-      <Text>Đăng ký</Text>
+    <View style={{ padding: 16 }}>
       <TextInput
-        style={styles.input}
-        // onChangeText={onChangeNumber}
-        // value={number}
-        placeholder="useless placeholder"
-        keyboardType="numeric"
+        style={{ marginBottom: 8 }}
+        mode="outlined"
+        // onChangeText={setUsername}
+        // value={username}
+        label="Họ và tên"
       />
       <TextInput
-        style={styles.input}
-        // onChangeText={onChangeNumber}
-        // value={number}
-        placeholder="useless placeholder"
-        keyboardType="numeric"
+        style={{ marginBottom: 8 }}
+        mode="outlined"
+        // onChangeText={setUsername}
+        // value={username}
+        label="Tên tài khoản"
       />
       <TextInput
-        style={styles.input}
-        // onChangeText={onChangeNumber}
-        // value={number}
-        placeholder="useless placeholder"
-        keyboardType="numeric"
+        style={{ marginBottom: 8 }}
+        mode="outlined"
+        // onChangeText={setUsername}
+        // value={username}
+        label="Email"
       />
-      <TouchableOpacity>
-        <Text>Đăng ký</Text>
-      </TouchableOpacity>
+      <TextInput
+        mode="outlined"
+        // onChangeText={setPassword}
+        // value={password}
+        label="Mật khẩu"
+        secureTextEntry={show}
+        right={
+          show === true ? (
+            <TextInput.Icon icon="eye" onPress={() => setShow(false)} />
+          ) : (
+            <TextInput.Icon icon="eye-off" onPress={() => setShow(true)} />
+          )
+        }
+      />
+      <Button
+        style={{ marginTop: 24, marginBottom: 12 }}
+        mode="contained"
+        onPress={() => loginUser()}
+      >
+        Tạo tài khoản
+      </Button>
+
+      <Button style={{ marginBottom: 12 }} onPress={() => {}}>
+        Đăng nhập
+      </Button>
     </View>
   );
 };
 export default Register;
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});
