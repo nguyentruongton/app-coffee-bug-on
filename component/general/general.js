@@ -12,6 +12,7 @@ const General = ({ navigation }) => {
   };
   const logout = () => {
     AsyncStorage.clear();
+    alert("Đăng xuất thành công!!!");
     navigation.navigate("Đăng nhập");
   };
   useEffect(() => {

@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
-const Login = () => {
+const Login = ({navigation}) => {
   const [show, setShow] = useState(true);
 
   const [username, setUsername] = useState("");
@@ -41,7 +41,7 @@ const Login = () => {
       await AsyncStorage.setItem("token", Auth.data.accessToken);
       setUsername("");
       setPassword("");
-      navigation.navigate("Cá nhân");
+      navigation.navigate("Tài khoản");
     } else {
       alert("Vui lòng xác thực tài khoản để đăng nhập.");
     }
@@ -97,7 +97,7 @@ const Login = () => {
           </Dialog>
         </Portal>
 
-        <Button style={{ marginBottom: 12 }} onPress={() => {}}>
+        <Button style={{ marginBottom: 12 }} onPress={() => {navigation.navigate("Đăng ký");}}>
           Tạo tài khoản
         </Button>
         <Button onPress={() => {}}>Quên mật khẩu?</Button>
