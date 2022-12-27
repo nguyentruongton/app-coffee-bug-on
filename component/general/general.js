@@ -1,23 +1,27 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
-import { Text, View, TouchableOpacity} from "react-native"; 
+import { Text, View, TouchableOpacity} from "react-native";
+import jwtDecode from 'jwt-decode';
 const General = ({navigation}) => {
-    const profileuser =
-    {
-        id: 1,
-        name: "Lê Huỳnh Phương Tùng"
+    const token = AsyncStorage.getItem('token');
+    console.log(token);
+    const logout = () => {
+        AsyncStorage.removeItem('token');
     }
+    console.log(token);
     return(
         <View>
-            <Text>Cài đặt chung</Text>
+            {token._z != null ? 
+            <View>
             <TouchableOpacity
-            onPress={() => {
-                navigation.navigate('Thông tin tài khoản',{
-                    id: profileuser.id,
-                    name: profileuser.name
-                })
-            }}
-            >
-                <Text>Thông tin tài khoản</Text>
+                onPress={() => {
+                    navigation.navigate('Thông tin tài khoản',{
+                        id: profileuser.id,
+                        name: profileuser.name
+                    })
+                }}
+                >
+                    <Text>Thông tin tài khoản</Text>
             </TouchableOpacity>
             <TouchableOpacity
             onPress={() => {
@@ -30,13 +34,21 @@ const General = ({navigation}) => {
                 <Text>Đơn hàng đã đặt</Text>
             </TouchableOpacity>
             <TouchableOpacity
+            onPress={() => logout()}
+            >
+                <Text>Đăng xuất</Text>
+            </TouchableOpacity>
+            </View>
+            : 
+            <View>
+            <TouchableOpacity
             onPress={() => {
                 navigation.navigate('Đăng nhập')
             }}
             >
-                <Text>Đăng nhập</Text>
+            <Text>Đăng nhập</Text>
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
             onPress={() => {
                 navigation.navigate('Đăng ký')
             }}
@@ -49,7 +61,10 @@ const General = ({navigation}) => {
             }}
             >
                 <Text>Trang Quên mật khẩu</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            </View>
+            }
+            
         </View>
     );
 }
