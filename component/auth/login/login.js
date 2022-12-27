@@ -4,7 +4,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { TextInput, Text, Button } from "react-native-paper";
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
-const Login = () => {
+const Login = ({navigation}) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const loginUser = async () => {
@@ -19,6 +19,7 @@ const Login = () => {
           await AsyncStorage.setItem('token', Auth.data.accessToken)
           setUsername('')
           setPassword('')
+          navigation.navigate('Cá nhân');
         } else{
           alert('Vui lòng xác thực tài khoản để đăng nhập.')
         }

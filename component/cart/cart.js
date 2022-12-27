@@ -1,4 +1,4 @@
-import react, { useContext, useState } from "react";
+import react, { useContext, useEffect, useState } from "react";
 import styles from "../../BugOnStyles";
 import { ListProductContext } from "../../context/listProductContext";
 import { ScrollView, Text, View } from "react-native";
@@ -17,12 +17,17 @@ import {
 } from "react-native-paper";
 
 const Cart = () => {
-  const token = AsyncStorage.getItem('token');
+  var token = AsyncStorage.getItem('token');
+  //   const InputData = async () => {
+  //       token = await AsyncStorage.getItem('token');
+  //       console.log(token);
+  //   }
+  //   useEffect(()=>{
+  //     InputData();
+  // },[])
   const { products, delProduct, upAmount, downAmount, clearCart } =
     useContext(ListProductContext);
   var sum = 0;
-  const [price, setPrice] = useState(0);
-  const [userid, setUserId] = useState("");
   const [namediscount, setNameDisCount] = useState("");
   const [discountid, setDisCountId] = useState("");
   const [discountprice, setDiscountPrice] = useState(0);
