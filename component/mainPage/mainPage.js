@@ -12,7 +12,7 @@ const MainPage = () => {
       <StatusBar currentHeight />
       <Appbar.Header>
         <Appbar.Content titleStyle={styles.titleAppBar} title="Cà phê BUG ỔN" />
-        <Appbar.Action icon="magnify" onPress={() => {}} />
+        {/* <Appbar.Action icon="magnify" onPress={() => {}} /> */}
       </Appbar.Header>
       <ScrollView centerContent={true} showsVerticalScrollIndicator={false}>
         <Panel />
