@@ -12,21 +12,23 @@ const General = ({ navigation }) => {
   };
   const logout = () => {
     AsyncStorage.clear();
-    alert("Đăng xuất thành công!!!");
+    alert("Đăng xuất thành công");
     navigation.navigate("Đăng nhập");
   };
   useEffect(() => {
     InputData();
   }, []);
+
   return (
     <View>
       <List.Item
         title="Đăng nhập"
-        left={(props) => <List.Icon {...props} icon="login" />}
+        left={(props) => <List.Icon {...props} icon="account" />}
         onPress={() => {
           navigation.navigate("Đăng nhập");
         }}
       />
+
       <List.Item
         title="Đăng xuất"
         left={(props) => <List.Icon {...props} icon="logout" />}

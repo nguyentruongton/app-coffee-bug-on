@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import axios from "axios";
-const Register = ({navigation}) => {
-
-  const [firstname, setFirstName] = useState('')
-  const [lastname, setLastName] = useState('')
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [rePassword, setRePassword] = useState('')
-  const [role, setRole] = useState('6335369ee1caa255ab840cd4')
+const Register = ({ navigation }) => {
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
+  const [role, setRole] = useState("6335369ee1caa255ab840cd4");
 
   const [show, setShow] = useState(true);
 
@@ -26,15 +25,15 @@ const Register = ({navigation}) => {
           role,
         })
         .then(function (response) {
-          alert('Mời bạn xác nhận Email trước khi đăng nhập');
+          alert("Mời bạn xác nhận Email trước khi đăng nhập");
         })
         .catch(function (error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     } else {
-      alert('Mật khẩu xác nhận không trùng khớp.');
+      alert("Mật khẩu xác nhận không trùng khớp.");
     }
-  }
+  };
 
   return (
     <View style={{ padding: 16 }}>
@@ -50,14 +49,14 @@ const Register = ({navigation}) => {
         mode="outlined"
         onChangeText={setFirstName}
         value={firstname}
-        label="tên"
+        label="Tên"
       />
       <TextInput
         style={{ marginBottom: 8 }}
         mode="outlined"
         onChangeText={setUsername}
         value={username}
-        label="Tên tài khoản"
+        label="Tài khoản"
       />
       <TextInput
         style={{ marginBottom: 8 }}
@@ -67,6 +66,7 @@ const Register = ({navigation}) => {
         label="Email"
       />
       <TextInput
+        style={{ marginBottom: 8 }}
         mode="outlined"
         onChangeText={setPassword}
         value={password}
@@ -98,14 +98,19 @@ const Register = ({navigation}) => {
         style={{ marginTop: 24, marginBottom: 12 }}
         mode="contained"
         onPress={() => {
-          addUser()
+          addUser();
           navigation.navigate("Đăng nhập");
         }}
       >
         Tạo tài khoản
       </Button>
 
-      <Button style={{ marginBottom: 12 }} onPress={() => {navigation.navigate("Đăng nhập");}}>
+      <Button
+        style={{ marginBottom: 12 }}
+        onPress={() => {
+          navigation.navigate("Đăng nhập");
+        }}
+      >
         Đăng nhập
       </Button>
     </View>

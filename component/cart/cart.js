@@ -20,10 +20,6 @@ import {
 } from "react-native-paper";
 
 const Cart = () => {
-  // const [visible, setVisible] = useState(false);
-  // const [success, setSuccess] = useState(false);
-  // const [login, setLogin] = useState(false);
-  // const hideDialog = () => setVisible(!visible);
   var token = AsyncStorage.getItem("token");
   //   const InputData = async () => {
   //       token = await AsyncStorage.getItem('token');
@@ -90,27 +86,20 @@ const Cart = () => {
           setDisCountId("");
           if (rec) {
             alert("Thanh toán thành công");
-            // setSuccess(true);
-            // setVisible(true);
             clearCart();
           } else {
             alert("Vui lòng thử lại sau");
-            // setSuccess(false);
-            // setVisible(true);
           }
         }
       }
-      // alert("Bạn đã đăng nhập rồi!!!");
+      alert("Bạn đã đăng nhập rồi");
       // console.log(jwtDecode(token._z).id);
     } else {
-      // setLogin(true);
-      // setVisible(true);
       alert("Bạn chưa đăng nhập");
     }
   };
 
   return (
-    // <Provider>
     <View>
       <Appbar.Header>
         <Appbar.Content titleStyle={styles.titleAppBar} title="Giỏ hàng" />
@@ -124,29 +113,10 @@ const Cart = () => {
           }}
         />
       </Appbar.Header>
-
       <View>
         {products.length > 0 ? (
           <ScrollView>
             <View style={{ padding: 16 }}>
-              {/* <Button
-                style={{
-                  // width: "50%",
-                  // flexDirection: "row",
-                  // justifyContent: "flex-end",
-                  marginBottom: 16,
-                }}
-                icon={"delete"}
-                mode="contained-tonal"
-                onPress={() => {
-                  clearCart();
-                  setNameDisCount("");
-                  setDisCountId("");
-                  setDiscountPrice(0);
-                }}
-              >
-                Xóa tất cả
-              </Button> */}
               {products.map((n) => (
                 <Card
                   mode="contained"
@@ -290,25 +260,6 @@ const Cart = () => {
               <Button icon={"cash"} mode="contained" onPress={() => addOrder()}>
                 Thanh toán
               </Button>
-              {/* <Portal>
-                  <Dialog visible={visible} onDismiss={hideDialog}>
-                    <Dialog.Title>Thông báo</Dialog.Title>
-                    <Dialog.Content>
-                      {login === true && (
-                        <Paragraph>Bạn chưa đăng nhập.</Paragraph>
-                      )}
-                      {success === true && (
-                        <Paragraph>Thanh toán thành công.</Paragraph>
-                      )}
-                      {success === false && (
-                        <Paragraph>Thanh toán thất bại.</Paragraph>
-                      )}
-                    </Dialog.Content>
-                    <Dialog.Actions>
-                      <Button onPress={hideDialog}>OK</Button>
-                    </Dialog.Actions>
-                  </Dialog>
-                </Portal> */}
             </View>
           </ScrollView>
         ) : (
@@ -334,7 +285,6 @@ const Cart = () => {
         )}
       </View>
     </View>
-    // </Provider>
   );
 };
 export default Cart;
